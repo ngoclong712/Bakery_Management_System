@@ -6,6 +6,24 @@
 	<title></title>
 </head>
 <body>
-Đây là giao diện admin
+<?php 
+
+session_start();
+if(isset($_SESSION['error'])) {
+	echo $_SESSION['error'];
+	unset($_SESSION['error']);
+}
+
+?>
+<form method="post" action="process_login.php">
+	<h1>Đăng nhập admin</h1>
+	Email
+	<input type="email" name="email">
+	<br>
+	Mật khẩu
+	<input type="password" name="password">
+	<br>
+	<button>Đăng nhập</button>
+</form>
 </body>
 </html>

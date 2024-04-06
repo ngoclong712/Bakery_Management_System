@@ -1,3 +1,7 @@
+<?php  
+session_start();
+include '../check_admin_login.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>

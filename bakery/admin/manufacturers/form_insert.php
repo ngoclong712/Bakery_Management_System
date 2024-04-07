@@ -10,6 +10,13 @@ include '../check_super_admin_login.php';
 	<title></title>
 </head>
 <body>
+
+<?php  
+if(isset($_SESSION['error'])) {
+	echo $_SESSION['error'] . "<br>";
+	unset($_SESSION['error']);
+}
+?>
 <form method="post" action="process_insert.php" enctype="multipart/form-data">
 	<h1>Thêm nhà sản xuất</h1>
 	<br>

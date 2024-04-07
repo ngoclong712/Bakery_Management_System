@@ -4,13 +4,21 @@ session_start();
 include '../check_super_admin_login.php';
 include '../connect.php';
 
+$photo = $_FILES['photo'];
+$file_extension = explode('.', $photo['name'])[1];
+
+
+if(empty($_POST['name']) ||empty($_POST['address']) || empty($_POST['phone']) || empty($file_extension)) {
+	header('location:form_insert.php');
+	$_SESSION['error'] = "Phải điền đầy đủ thông tin";
+	exit;
+}
+
 $name = $_POST['name'];
 $address = $_POST['address'];
-$photo = $_FILES['photo'];
 $phone = $_POST['phone'];
 
 $folder = "photos/";
-$file_extension = explode('.', $photo['name'])[1];
 $file_name = time(). '.' . $file_extension;
 $file_path = $folder.$file_name;
 

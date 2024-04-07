@@ -10,6 +10,13 @@ include '../check_super_admin_login.php';
 	<title></title>
 </head>
 <body>
+<?php  
+if(isset($_SESSION['success'])) {
+	echo $_SESSION['success'] . "<br>";
+	unset($_SESSION['success']);
+
+}
+?>
 Đây là giao diện quản lý nhà sản xuất
 </body>
 </html>

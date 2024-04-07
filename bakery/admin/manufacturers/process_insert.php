@@ -1,12 +1,8 @@
 <?php 
 
 session_start();
-include '../check_super_admin_login.php';
-include '../connect.php';
-
-
-
-
+require '../check_super_admin_login.php';
+require '../connect.php';
 
 if(empty($_POST['name']) ||empty($_POST['address']) || empty($_POST['phone'])) {
 	header('location:form_insert.php');

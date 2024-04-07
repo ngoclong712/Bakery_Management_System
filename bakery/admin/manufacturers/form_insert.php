@@ -1,6 +1,6 @@
 <?php  
 session_start();
-include '../check_super_admin_login.php';
+require '../check_super_admin_login.php';
 ?>
 <!DOCTYPE html>
 <html>

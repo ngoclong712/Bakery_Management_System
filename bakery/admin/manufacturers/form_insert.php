@@ -32,7 +32,7 @@ if(isset($_SESSION['error'])) {
 	Ảnh
 	<input type="file" name="photo">
 	<br>
-	<button>Gửi</button>
+	<button>Thêm</button>
 </form>
 </body>
 </html>

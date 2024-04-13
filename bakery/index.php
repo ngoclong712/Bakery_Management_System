@@ -13,6 +13,11 @@
 			$_SESSION['name'] = $each['name'];
 		}
 	}
+	if(isset($_SESSION['error'])) {
+		echo $_SESSION['error'];
+		unset($_SESSION['error']);
+	}
+
 ?>
 <!DOCTYPE html>
 <html>

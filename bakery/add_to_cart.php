@@ -21,4 +21,5 @@ else {
 	$_SESSION['cart'][$id]['quantity'] ++;
 }
 
+$_SESSION['success'] = "Thêm vào giỏ hàng thành công";
 header('location:index.php');

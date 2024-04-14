@@ -17,7 +17,7 @@
 <?php } else { 
 	$cart = $_SESSION['cart'];
 	$sum = 0;
-} ?>
+?>
 <table border="1" width="100%">
 	<tr>
 		<th>Mã sản phẩm</th>
@@ -45,7 +45,7 @@
 					-
 				</a>
 				<?php echo $each['quantity'] ?>
-				<a href="update_quantity.php?id=<?php echo $each['id'] ?>&type=dec">
+				<a href="update_quantity.php?id=<?php echo $each['id'] ?>&type=inc">
 					+
 				</a>
 			</td>
@@ -57,7 +57,7 @@
 				?>		
 			</td>
 			<td>
-				<a href="delete_from_cart.php">X</a>
+				<a href="delete_from_cart.php?id=<?php echo $each['id'] ?>">X</a>
 			</td>
 		</tr>
 	<?php } ?>
@@ -86,5 +86,6 @@
 	<br>
 	<button>Đặt hàng</button>
 </form>
+<?php } ?>
 </body>
 </html>

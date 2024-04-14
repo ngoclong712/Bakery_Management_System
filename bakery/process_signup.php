@@ -26,6 +26,11 @@ if(mysqli_num_rows($result) == 1) {
 $sql = "insert into customers(name, email, password, phone, address)
 values('$name','$email','$password','$phone','$address')";
 
+require 'mail.php';
+$title = "Đăng ký tài khoản thành công";
+$content = "Chúc mừng bạn đã đăng ký thành công, tài khoản đăng nhập của bạn là " . $email . ", vui lòng bấm vào đây để đăng nhập: <a href='http://localhost/bakery/signin.php'> Đăng nhập</a>";
+sendmail($email, $name, $title, $content);
+
 mysqli_query($connect, $sql);
 
 $sql = "select * from customers where email = '$email'";

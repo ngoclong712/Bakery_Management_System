@@ -16,7 +16,6 @@ require '../menu.php';
 <h1>Đây là giao diện admin</h1>
 <h4>Chào bạn 
 	<?php
-		
 		echo $_SESSION['name'];
 	?>
 </h4>

@@ -25,6 +25,8 @@ if(isset($_SESSION['error'])) {
 	<input type="checkbox" name="remember">
 	<br>
 	<button>Đăng nhập</button>
+	<br>
+	<a href="forgot_password.php">Quên mật khẩu</a>
 </form>
 </body>
 </html>

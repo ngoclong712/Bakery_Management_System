@@ -3,21 +3,31 @@
 		<li>
 			<a href="index.php">Trang chủ</a>
 		</li>
-		<?php if(empty($_SESSION['id'])) { ?>
-			<li>
-				<a href="signin.php">Đăng nhập</a>
-			</li>
-			<li>
-				<a href="signup.php">Đăng ký</a>
-			</li>
-		<?php } else { ?>
-			<li>
-				<?php echo "Xin chào " . $_SESSION['name'] ?>
-				<a href="signout.php">Đăng xuất</a>
-			</li>
-			<li>
-				<a href="view_cart.php">Xem giỏ hàng</a>
-			</li>
-		<?php } ?>
+		<li class="menu-guest" style="<?php if(!empty($_SESSION['id'])) { ?> display:none <?php } ?>">
+			<a href="signin.php">Đăng nhập</a>
+		</li>
+		<li class="menu-guest" style="<?php if(!empty($_SESSION['id'])) { ?> display:none <?php } ?>">
+			<button type="button" data-toggle="modal" data-target="#modal-signup">
+				Đăng ký
+			</button>
+		</li>
+		
+		<li class="menu-user" style="<?php if(empty($_SESSION['id'])) { ?> display:none <?php } ?>">
+			Xin chào 
+			<span id="span-name">
+				<?php echo $_SESSION['name'] ?? '' ?>
+			</span>	
+			<a href="signout.php">Đăng xuất</a>
+		</li>
+		<li class="menu-user" style="<?php if(empty($_SESSION['id'])) { ?> display:none <?php } ?>">
+			<a href="view_cart.php">Xem giỏ hàng</a>
+		</li>
 	</ol>
 </div>
+
+<?php 
+	if(empty($_SESSION['id'])) {
+		include 'signup.php'; 
+		// include 'signin.php'; 
+	}
+?>

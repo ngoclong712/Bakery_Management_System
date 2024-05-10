@@ -6,10 +6,22 @@
 	<title></title>
 </head>
 <body>
-Chọn thời gian
-<input type="date" name="" value="<?php echo date('Y-m-d') ?>">
-<input type="week" name="">
-<input type="month" name="">
+<form>
+	Điền gì đó đi
+	<input type="text" name="ten" id="ten">
+</form>
+<div id="ket_qua">
+	
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#ten").keyup(function(event) {
+			let ten = $(this).val();
+			$("#ket_qua").text('Bạn đã điền: ' + ten);
+		});
+	});
+</script>
 <!-- 
 đóng kết nối ở đâu (tránh trong vòng lặp)
 
@@ -24,6 +36,10 @@ dung PDO kết hợp prepare param tránh sql injection
 theo 1 quy tắc, vd viết hoa chữ cái đầu cho tiêu đề =>> áp dụng hết
 
 validate trước =>> r mới khai báo biến, validate có thể addslashes
+
+validate cả backend và frontend(dùng js), validate backend trước
+
+validate js tách 1 file riêng
 
 nút đăng nhập ở bên trái, hủy ở bên phải
 

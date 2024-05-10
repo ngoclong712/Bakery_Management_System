@@ -16,7 +16,7 @@
 	<h1>Giỏ hàng của bạn hiện tại tạm thời trống, hãy quay lại sau khi đặt hàng nhé</h1>
 <?php } else { 
 	$cart = $_SESSION['cart'];
-	$sum = 0;
+	$total = 0;
 ?>
 <table border="1" width="100%">
 	<tr>
@@ -39,32 +39,53 @@
 					<p>Sản phẩm tạm thời chưa có hình ảnh minh họa</p>
 				<?php } ?>
 			</td>
-			<td><?php echo $each['price'] ?></td>
 			<td>
-				<a href="update_quantity.php?id=<?php echo $each['id'] ?>&type=dec">
+				<span class="span-price">
+					<?php echo $each['price'] ?>
+				</span>
+				
+			</td>
+			<td>
+				<button 
+				class="btn-update-quantity" 
+				data-id="<?php echo $each['id'] ?>"
+				data-type="dec"
+				>
 					-
-				</a>
-				<?php echo $each['quantity'] ?>
-				<a href="update_quantity.php?id=<?php echo $each['id'] ?>&type=inc">
+				</button>
+				<span class="span-quantity">
+					<?php echo $each['quantity'] ?>
+				</span>
+				<button 
+				class="btn-update-quantity" 
+				data-id="<?php echo $each['id'] ?>"
+				data-type="inc"
+				>
 					+
-				</a>
+				</button>
 			</td>
 			<td>
-				<?php  
-					$result = $each['price'] * $each['quantity'];
-					$sum += $result;
-					echo $result;
-				?>		
+				<span class="span-sum">
+					<?php 
+						$sum = $each['quantity']*$each['price'];
+						$total += $sum;
+						echo $sum;
+					?>
+				</span>
 			</td>
 			<td>
-				<a href="delete_from_cart.php?id=<?php echo $each['id'] ?>">X</a>
+				<button class="btn-delete" data-id="<?php echo $each['id'] ?>">
+					X
+				</button>
 			</td>
 		</tr>
 	<?php } ?>
 </table>
 <h1>
-	Tổng tiền hóa đơn:
-	<?php echo "$" . $sum ?>
+	Tổng tiền hóa đơn: $
+	<span id="span-total">
+		<?php echo  $total ?>
+	</span>
 </h1>
 <?php 
 	$id = $_SESSION['id'];
@@ -87,5 +108,63 @@
 	<button>Đặt hàng</button>
 </form>
 <?php } ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".btn-update-quantity").click(function(event) {
+		let btn = $(this);
+		let id = btn.data('id');
+		let type = btn.data('type');
+		$.ajax({
+			url: 'update_quantity.php',
+			type: 'GET',
+			data: {id, type},
+		})
+		.done(function() {
+			let parent_tr = btn.parents('tr');
+			let price = parent_tr.find('.span-price').text();
+			let quantity = parent_tr.find('.span-quantity').text();
+			if(type === 'inc') {
+				quantity++;
+			}
+			else {
+				quantity--;
+			}
+			if(quantity === 0) {
+				parent_tr.remove();
+				/*xử lí khi giỏ hàng trống*/
+			}
+			else {
+				parent_tr.find('.span-quantity').text(quantity);
+				let sum = price * quantity;
+				parent_tr.find('.span-sum').text(sum);
+			}
+
+			getTotal();
+
+		})
+	});
+	$(".btn-delete").click(function(event) {
+		let btn = $(this);
+		let id = btn.data('id');
+		$.ajax({
+			url: 'delete_from_cart.php',
+			type: 'GET',
+			data: {id},
+		})
+		.done(function() {
+			btn.parents('tr').remove();
+			getTotal();
+		})
+	});
+});
+function getTotal() {
+	let total = 0;
+	$(".span-sum").each(function() {
+		total += parseFloat($(this).text());
+	});
+	$("#span-total").text(total);
+}
+</script>
 </body>
 </html>

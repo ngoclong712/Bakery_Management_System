@@ -1,6 +1,13 @@
 <?php 
 
+try {
+	
 session_start();
+
+if(empty($_GET['id'])) {
+	throw new Exception("Không tồn tại id");
+	
+}
 
 $id = $_GET['id'];
 
@@ -21,5 +28,10 @@ else {
 	$_SESSION['cart'][$id]['quantity'] ++;
 }
 
-$_SESSION['success'] = "Thêm vào giỏ hàng thành công";
-header('location:index.php');
+// $_SESSION['success'] = "Thêm vào giỏ hàng thành công";
+// header('location:index.php');
+echo 1;
+
+} catch (Throwable $e) {
+	echo $e->getMessage();
+}
